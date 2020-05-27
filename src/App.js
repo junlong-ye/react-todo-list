@@ -47,32 +47,36 @@ class App extends Component {
   };
   handleEdit = (id) => {
     const filteredItems = this.state.items.filter((item) => item.id !== id);
-    const selectItem = this.state.items.find((item) => (item.id = id));
+
+    const selectedItem = this.state.items.find((item) => item.id === id);
+
+    console.log(selectedItem);
+
     this.setState({
       items: filteredItems,
-      item: selectItem.title,
+      item: selectedItem.title,
       editItem: true,
       id: id,
     });
   };
   render() {
     return (
-      <div class="container">
-        <div class="row">
-          <div class="col-10 mx-auto col-md-8 mt-4">
+      <div className="container">
+        <div className="row">
+          <div className="col-10 mx-auto col-md-8 mt-4">
             <h3 className="text-capitalize text-center">todo input</h3>
             <TodoInput
               item={this.state.item}
               handleChange={this.handleChange}
               handleSubmit={this.handleSubmit}
-            ></TodoInput>
+              editItem={this.state.editItem}
+            />
             <TodoList
               items={this.state.items}
               clearList={this.clearList}
               handleDelete={this.handleDelete}
               handleEdit={this.handleEdit}
-              editItem={this.state.editItem}
-            ></TodoList>
+            />
           </div>
         </div>
       </div>
